@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}
@@ -11,8 +12,9 @@
 {% endblock texto_header %}
 
 {% block despues_del_header %}
-
-    <a href={% url 'listado_perros' %}>Lista de Perros</a>
+<p>
+    <a href={% url 'listado_perros' %}>Volver</a>
+</p>
 <p>
     <form action={% url 'crear_perro' %} method="post">
         {% csrf_token %}

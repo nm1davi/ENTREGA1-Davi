@@ -1,20 +1,12 @@
-
-from re import template
 from django.shortcuts import redirect, render
-from django.template import loader
-from django.http import HttpResponse
-from datetime import datetime
-from .forms import FormPerro, BusquedaPerro
+
+from .forms import BusquedaPerro, FormPerro
 from .models import Perro
-
-def inicio(request):
-    return render(request, "index.html")
+from datetime import datetime
 
 
-def listado_perros(request):
-    lista_perros= Perro.objects.all()
-    return render(request, "listado_perros.html", {"lista_perros": lista_perros})
-
+def una_vista(request):
+    return render(request, 'index.html')
 
 def crear_perro(request):
     if request.method == 'POST':
@@ -37,16 +29,20 @@ def crear_perro(request):
     
     form_perro = FormPerro()
     
-    return render(request, "crear_perro.html", {'form': form_perro})
+    return render(request, 'crear_perro.html', {'form': form_perro})
 
-def listado(request):
+def listado_perros(request):
     
     nombre_de_busqueda = request.GET.get('nombre')
     
     if nombre_de_busqueda:
-        listado_perros = Perro.objects.filter(nombre_icontains=nombre_de_busqueda) 
+        listado_perros = Perro.objects.filter(nombre__icontains=nombre_de_busqueda) 
     else:
         listado_perros = Perro.objects.all()
     
     form = BusquedaPerro()
-    return render(request, 'perro/listado_perros.html', {'listado_perros': listado_perros, 'form': form})
+    return render(request, 'listado_perros.html', {'listado_perros': listado_perros, 'form': form})
+
+def mostrar_perro(request, id):
+    perro = Perro.objects.get(id=id)
+    return render(request, 'perro/mostrar_perro.html', {'perro': perro})
