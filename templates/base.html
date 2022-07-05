@@ -22,13 +22,13 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href={% url 'index' %}>Index</a>
-                <a class="navbar-brand" href={% url 'listado_perros' %}>Listado De Perros</a>
+                <a class="navbar-brand" href={% url 'crear_perro' %}>Crear Perro</a>
             </div>
         </nav>
         
         {% block header %}       
-        {% block texto_h1 %}
-        {% endblock texto_h1 %}
+        {% block texto_header %}
+        {% endblock texto_header %}
     {% endblock header %}<!-- Masthead-->
 
         {% block despues_del_header %}

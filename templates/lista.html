@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Listado Perros</title>
+<title>Listado de Perros</title>
 {% endblock title %}
 
 {% block texto_header %}
-Listado de Perros
+<h1>
+Listado de Perros  
+</h1>
 {% endblock texto_header %}
 
 
  {% block despues_del_header %}
  <p>
-     {% for perro in lista_perros  %}
-     <li>
-         Nombre : {{perro.nombre}} - Edad : {{perro.edad}}
-     </li>
-     {% endfor %}
+     <ul>
+         {% for perro in listado_perro  %}
+         <li>{{perro}}</li>
+         {% endfor %}
+     </ul>
  </p>
  {% endblock despues_del_header %}
