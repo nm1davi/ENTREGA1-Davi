@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Perro',
+            name='Auto',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nombre', models.CharField(max_length=30)),
-                ('edad', models.IntegerField()),
+                ('marca', models.CharField(max_length=30)),
+                ('modelo', models.IntegerField()),
                 ('fecha_creacion', models.DateField(null=True)),
             ],
         ),

@@ -2,21 +2,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Crear Perro</title>
+<title>Crear Auto</title>
 {% endblock title %}
 
 {% block texto_header %}
 <h1>
-    Creacion de Perro
+    Creacion de Auto
 </h1>
 {% endblock texto_header %}
 
 {% block despues_del_header %}
 <p>
-    <a href={% url 'listado_perros' %}>Volver</a>
+    <a href={% url 'listado_Autos' %}>Volver</a>
 </p>
 <p>
-    <form action={% url 'crear_perro' %} method="post">
+    <form action={% url 'crear_Auto' %} method="post">
         {% csrf_token %}
         <table>
             {{form.as_table}}

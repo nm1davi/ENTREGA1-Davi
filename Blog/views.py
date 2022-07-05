@@ -1,48 +1,49 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import BusquedaPerro, FormPerro
-from .models import Perro
+from .forms import BusquedaAuto, FormAuto
+from .models import Auto
 from datetime import datetime
 
+
+def acerca_de_nosotros(request):
+    return render(request, 'about.html')
 
 def una_vista(request):
     return render(request, 'index.html')
 
-def crear_perro(request):
+def crear_Auto(request):
     if request.method == 'POST':
-        form = FormPerro(request.POST)
+        form = FormAuto(request.POST)
         
         if form.is_valid():
             data = form.cleaned_data
             
-            perro = Perro(
-                nombre=data.get('nombre'),
-                edad=data.get('edad'),
+            auto = Auto(
+                marca=data.get('marca'),
+                modelo=data.get('modelo'),
                 fecha_creacion=data.get('fecha_creacion') if data.get('fecha_creacion') else datetime.now()
             )
-            perro.save()
-            return redirect('listado_perros')
+            auto.save()
+            return redirect('listado_Autos')
         
         else:
-            return render(request, 'crear_perro.html', {'form': form})
+            return render(request, 'crear_auto.html', {'form': form})
             
     
-    form_perro = FormPerro()
+    form_Auto = FormAuto()
     
-    return render(request, 'crear_perro.html', {'form': form_perro})
+    return render(request, 'crear_auto.html', {'form': form_Auto})
 
-def listado_perros(request):
+def listado_Autos(request):
     
-    nombre_de_busqueda = request.GET.get('nombre')
+    marca_de_busqueda = request.GET.get('marca')
     
-    if nombre_de_busqueda:
-        listado_perros = Perro.objects.filter(nombre__icontains=nombre_de_busqueda) 
+    if marca_de_busqueda:
+        listado_Autos = Auto.objects.filter(marca__icontains=marca_de_busqueda) 
     else:
-        listado_perros = Perro.objects.all()
+        listado_Autos = Auto.objects.all()
     
-    form = BusquedaPerro()
-    return render(request, 'listado_perros.html', {'listado_perros': listado_perros, 'form': form})
+    form = BusquedaAuto()
+    return render(request, 'listado_autos.html', {'listado_Autos': listado_Autos, 'form': form})
 
-def mostrar_perro(request, id):
-    perro = Perro.objects.get(id=id)
-    return render(request, 'perro/mostrar_perro.html', {'perro': perro})

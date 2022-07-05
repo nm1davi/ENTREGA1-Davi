@@ -1,9 +1,9 @@
 from django.db import models
 
-class Perro(models.Model):
-    nombre= models.CharField(max_length=30)
-    edad= models.IntegerField()
+class Auto(models.Model):
+    marca= models.CharField(max_length=30)
+    modelo= models.IntegerField()
     fecha_creacion= models.DateField(null=True)
     
     def __str__(self):
-        return f"Soy un perro llamado {self.nombre}"
+        return f"La marca del auto es {self.marca} , modelo {self.modelo} y su fecha de creacion es {self.fecha_creacion}"

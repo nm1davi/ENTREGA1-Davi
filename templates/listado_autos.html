@@ -2,22 +2,22 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Listado de Perros</title>
+<title>Listado de Autos</title>
 {% endblock title %}
 
 {% block texto_header %}
 <h1>
-    Listado de Perros
+    Listado de Autos
 </h1>
 {% endblock texto_header %}
 
 {% block despues_del_header %}
 <p>
-    <a href={% url 'crear_perro' %}>Crear Perro</a>
+    <a href={% url 'crear_Auto' %}>Crear Auto</a>
 </p>
 
 <p>
-    <form action={% url 'listado_perros' %}>
+    <form action={% url 'listado_Autos' %}>
         {{form}}
         <button>Buscar</button>
     </form>
@@ -25,10 +25,14 @@
 
 
 <p>
+    {% if listado_Autos %}
     <ul>
-        {% for perro in listado_perros %}
-        <li>{{perro}}</li>
+        {% for auto in listado_Autos %}
+        <li>{{auto}}</li>
         {% endfor %}
     </ul>
+    {% else %}
+    No se encotraron datos.
+    {% endif %}
 </p>
 {% endblock despues_del_header %}
