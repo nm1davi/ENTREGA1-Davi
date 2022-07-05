@@ -6,17 +6,18 @@
 
 {% block texto_header %}
 <h1>
-Listado de Perros  
+    Listado de Perros
 </h1>
 {% endblock texto_header %}
 
+{% block despues_del_header %}
+<p>
+    <a href={% url 'index' %}>Volver</a>
+</p>
 
- {% block despues_del_header %}
- <p>
-     <ul>
-         {% for perro in listado_perro  %}
-         <li>{{perro}}</li>
-         {% endfor %}
-     </ul>
- </p>
- {% endblock despues_del_header %}
+<p>
+    <form action={% url 'listado_perros' %}>
+        {{form}}
+        <button>Buscar</button>
+    </form>
+</p>

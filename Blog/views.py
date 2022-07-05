@@ -4,8 +4,9 @@ from django.shortcuts import redirect, render
 from django.template import loader
 from django.http import HttpResponse
 from datetime import datetime
-from Blog.forms import FormPerro
-from Blog.models import Perro
+from .forms import FormPerro, BusquedaPerro
+from .models import Perro
+
 def inicio(request):
     return render(request, "index.html")
 
@@ -37,3 +38,15 @@ def crear_perro(request):
     form_perro = FormPerro()
     
     return render(request, "crear_perro.html", {'form': form_perro})
+
+def listado(request):
+    
+    nombre_de_busqueda = request.GET.get('nombre')
+    
+    if nombre_de_busqueda:
+        listado_perros = Perro.objects.filter(nombre_icontains=nombre_de_busqueda) 
+    else:
+        listado_perros = Perro.objects.all()
+    
+    form = BusquedaPerro()
+    return render(request, 'perro/listado_perros.html', {'listado_perros': listado_perros, 'form': form})

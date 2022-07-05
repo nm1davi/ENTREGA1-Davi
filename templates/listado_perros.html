@@ -5,11 +5,21 @@
 {% endblock title %}
 
 {% block texto_header %}
+<h1>
 Listado de Perros
+</h1>
+
+
 {% endblock texto_header %}
+a{% url 'crear_perro' %}
 
 
- {% block despues_del_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'crear_perro' %}>Volver</a>
+</p>
+ 
  <p>
      {% for perro in lista_perros  %}
      <li>
