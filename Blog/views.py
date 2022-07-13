@@ -28,12 +28,12 @@ def crear_Auto(request):
             return redirect('listado_Autos')
         
         else:
-            return render(request, 'crear_auto.html', {'form': form})
+            return render(request, 'auto/crear_auto.html', {'form': form})
             
     
     form_Auto = FormAuto()
     
-    return render(request, 'crear_auto.html', {'form': form_Auto})
+    return render(request, 'auto/crear_auto.html', {'form': form_Auto})
 
 def listado_Autos(request):
     
@@ -45,5 +45,32 @@ def listado_Autos(request):
         listado_Autos = Auto.objects.all()
     
     form = BusquedaAuto()
-    return render(request, 'listado_autos.html', {'listado_Autos': listado_Autos, 'form': form})
+    return render(request, 'auto/listado_autos.html', {'listado_Autos': listado_Autos, 'form': form})
 
+def editar_Auto(request, id):
+    auto = Auto.objects.get(id=id)
+    if request.method == 'POST':
+        form = FormAuto(request.POST)
+        if form.is_valid():
+            auto.marca = form.cleaned_data.get("marca")
+            auto.modelo = form.cleaned_data.get("modelo")
+            auto.fecha_creacion = form.cleaned_data.get("fecha_creacion")
+            auto.save()
+            return redirect('listado_Autos')
+        else:
+            return render(request, 'auto/editar_auto.html', {'form': form, "auto": auto} )
+
+ 
+    form_Auto = FormAuto(initial={"marca": auto.marca , "modelo": auto.modelo , "fecha_creacion": auto.fecha_creacion})
+    
+    return render(request, 'auto/editar_auto.html', {'form': form_Auto, "auto": auto})
+    
+    
+def eliminar_Auto(request, id):
+    auto = Auto.objects.get(id=id)
+    auto.delete()
+    return redirect('listado_Autos')
+
+def mostrar_Auto(request, id):
+    auto = Auto.objects.get(id=id)
+    return render(request, "auto/mostrar_auto.html", {"auto": auto})

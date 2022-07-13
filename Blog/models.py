@@ -7,3 +7,4 @@ class Auto(models.Model):
     
     def __str__(self):
         return f"La marca del auto es {self.marca} , modelo {self.modelo} y su fecha de creacion es {self.fecha_creacion}"
+    

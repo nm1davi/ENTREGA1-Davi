@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Auto</title>
+{% endblock title %}
+
+{% block texto_header %}
+<h1>
+    Auto
+</h1>
+{% endblock texto_header %}
+
+{% block despues_del_header %}
+<p>
+    <a href={% url 'listado_Autos' %}>Volver</a>
+</p>
+
+
+
+
+<p>
+    <ul>
+        <li>
+            {{auto.marca}} 
+        </li>
+        <li>
+            {{auto.modelo}} 
+        </li>
+        <li>
+            {{auto.fecha_creacion}} 
+        </li>
+    </ul>
+</p>
+{% endblock despues_del_header %}

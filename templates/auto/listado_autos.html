@@ -28,7 +28,13 @@
     {% if listado_Autos %}
     <ul>
         {% for auto in listado_Autos %}
-        <li>{{auto}}</li>
+        <li>
+            {{auto}} 
+            <a href={% url 'editar_Auto' auto.id %}>Editar</a>
+            <a href={% url 'eliminar_Auto' auto.id %}>Eliminar</a>
+            <a href={% url 'mostrar_Auto' auto.id %}>Mostrar</a>
+
+        </li>
         {% endfor %}
     </ul>
     {% else %}
