@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from .forms import BusquedaAuto, FormAuto
 from .models import Auto
 from datetime import datetime
-
+from django.contrib.auth.decorators import login_required
 
 def acerca_de_nosotros(request):
     return render(request, 'about.html')
@@ -46,7 +46,7 @@ def listado_Autos(request):
     
     form = BusquedaAuto()
     return render(request, 'auto/listado_autos.html', {'listado_Autos': listado_Autos, 'form': form})
-
+@login_required
 def editar_Auto(request, id):
     auto = Auto.objects.get(id=id)
     if request.method == 'POST':
@@ -65,7 +65,7 @@ def editar_Auto(request, id):
     
     return render(request, 'auto/editar_auto.html', {'form': form_Auto, "auto": auto})
     
-    
+@login_required    
 def eliminar_Auto(request, id):
     auto = Auto.objects.get(id=id)
     auto.delete()
