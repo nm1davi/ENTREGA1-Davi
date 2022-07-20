@@ -22,6 +22,7 @@ def crear_Auto(request):
             auto = Auto(
                 marca=data.get('marca'),
                 modelo=data.get('modelo'),
+                descripcion=data.get('descripcion'),
                 fecha_creacion=data.get('fecha_creacion') if data.get('fecha_creacion') else datetime.now()
             )
             auto.save()
@@ -54,6 +55,7 @@ def editar_Auto(request, id):
         if form.is_valid():
             auto.marca = form.cleaned_data.get("marca")
             auto.modelo = form.cleaned_data.get("modelo")
+            auto.descripcion = form.cleaned_data.get("descripcion")
             auto.fecha_creacion = form.cleaned_data.get("fecha_creacion")
             auto.save()
             return redirect('listado_Autos')
@@ -61,7 +63,11 @@ def editar_Auto(request, id):
             return render(request, 'auto/editar_auto.html', {'form': form, "auto": auto} )
 
  
-    form_Auto = FormAuto(initial={"marca": auto.marca , "modelo": auto.modelo , "fecha_creacion": auto.fecha_creacion})
+    form_Auto = FormAuto(initial={
+        "marca": auto.marca , 
+        "modelo": auto.modelo , 
+        "descripcion": auto.descripcion , 
+        "fecha_creacion": auto.fecha_creacion})
     
     return render(request, 'auto/editar_auto.html', {'form': form_Auto, "auto": auto})
     

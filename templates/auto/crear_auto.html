@@ -19,6 +19,7 @@
     <form action={% url 'crear_Auto' %} method="post">
         {% csrf_token %}
         <table>
+            {{form.media}}
             {{form.as_table}}
         </table>
         <button>Crear</button>

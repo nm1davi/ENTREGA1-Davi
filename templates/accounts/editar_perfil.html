@@ -2,24 +2,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Editar Auto</title>
+<title>Editar Perfil</title>
 {% endblock title %}
 
 {% block texto_header %}
 <h1>
-    Editar Auto
+    Editando Perfil de {{request.user.username}}
 </h1>
 {% endblock texto_header %}
 
 {% block despues_del_header %}
+
 <p>
-    <a href={% url 'listado_Autos' %}>Volver</a>
-</p>
-<p>
-    <form action={% url 'editar_Auto' auto.id %} method="post">
+    <form action={% url 'editar_perfil' %} method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
-            {{form.media}}
             {{form.as_table}}
         </table>
         <button>Editar</button>
