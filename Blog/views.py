@@ -12,6 +12,7 @@ def acerca_de_nosotros(request):
 def una_vista(request):
     return render(request, 'index.html')
 
+@login_required
 def crear_Auto(request):
     if request.method == 'POST':
         form = FormAuto(request.POST)

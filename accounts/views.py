@@ -58,16 +58,15 @@ def editar_perfil(request):
         form = MyUserEditForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
+            user.descripcion = form.cleaned_data.get("descripcion")
             if data.get('first_name'):
                 user.first_name = data.get('first_name')
             if data.get('last_name'):
                 user.last_name = data.get('last_name')
                 
-            user.email = data.get('email') if data.get('email') else user.email
+            user.email = data.get('Mail') if data.get('Mail') else user.email
             mas_datos_usuario.avatar = data.get('avatar') if data.get('avatar') else mas_datos_usuario.avatar
             
-            # if data.get('password1') and data.get('password1') == data.get('password2'):
-            #     user.set_password(data.get('password1'))
             
             mas_datos_usuario.save()
             user.save()
@@ -79,10 +78,10 @@ def editar_perfil(request):
             
     form = MyUserEditForm(
             initial={
-                'email': user.email,
+                'Mail': user.email,
                 'first_name': user.first_name,
                 'last_name': user.last_name,
-                'avatar': mas_datos_usuario.avatar
+                'avatar': mas_datos_usuario.avatar,
             }
         )
 
